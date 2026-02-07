@@ -2093,7 +2093,7 @@ strong {
    PRIVACIDADE
 ======================================== */
 .privacidade {
-  padding: 0 0 var(--space-10);
+  padding: var(--space-6) 0 var(--space-10);
   margin-top: calc(-1 * var(--space-10));
 }
 
