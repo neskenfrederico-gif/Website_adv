@@ -1,14 +1,7 @@
 <?php
 // =============================================
-// CONFIGURAÇÕES SMTP - HOSTINGER
+// CONFIGURAÇÕES
 // =============================================
-require_once 'smtp.php';
-
-$smtp_server = "smtp.hostinger.com";
-$smtp_port = 465;
-$smtp_user = "contato@valdenisesantos.adv.br";
-$smtp_pass = "Kee3304ml@2050";
-
 $destinatario = "contato@valdenisesantos.adv.br";
 $assunto_prefixo = "[Site] Nova mensagem: ";
 
@@ -63,6 +56,10 @@ $corpo .= "═══════════════════════
 $corpo .= "Enviado em: " . date('d/m/Y H:i:s') . "\n";
 $corpo .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
 
+$headers1 = "From: $destinatario\r\n";
+$headers1 .= "Reply-To: $email\r\n";
+$headers1 .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
 // =============================================
 // EMAIL 2: AUTO-RESPOSTA PARA O CLIENTE
 // =============================================
@@ -84,26 +81,19 @@ $corpo_cliente .= "Advogada - OAB/GO 69640\n";
 $corpo_cliente .= "contato@valdenisesantos.adv.br\n";
 $corpo_cliente .= "www.valdenisesantos.adv.br\n";
 
+$headers2 = "From: Dra. Valdenise Santos <$destinatario>\r\n";
+$headers2 .= "Reply-To: $destinatario\r\n";
+$headers2 .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
 // =============================================
-// ENVIAR VIA SMTP
+// ENVIAR EMAILS
 // =============================================
-try {
-    $mailer = new SMTPMailer($smtp_server, $smtp_port, $smtp_user, $smtp_pass);
-    
-    // Enviar para a advogada
-    $enviado1 = $mailer->send($destinatario, $assunto_email, $corpo, $nome, $email);
-    
-    // Enviar auto-resposta para o cliente
-    $mailer2 = new SMTPMailer($smtp_server, $smtp_port, $smtp_user, $smtp_pass);
-    $enviado2 = $mailer2->send($email, $assunto_cliente, $corpo_cliente, "Dra. Valdenise Santos", $smtp_user);
-    
-    if ($enviado1) {
-        header("Location: obrigado.html");
-    } else {
-        header("Location: contato.html?erro=envio");
-    }
-} catch (Exception $e) {
-    error_log("Erro SMTP: " . $e->getMessage());
+$enviado1 = @mail($destinatario, $assunto_email, $corpo, $headers1);
+$enviado2 = @mail($email, $assunto_cliente, $corpo_cliente, $headers2);
+
+if ($enviado1) {
+    header("Location: obrigado.html");
+} else {
     header("Location: contato.html?erro=envio");
 }
 exit;
