@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://neskenfrederico-gif.github.io/Website_adv/sitemap.xml
+Sitemap: https://valdenisesantos.adv.br/sitemap.xml
 
 # Crawl-delay para não sobrecarregar
 Crawl-delay: 1
