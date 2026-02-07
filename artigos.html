@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles.css?v=3.0.0">
+  <link rel="stylesheet" href="styles.css?v=5.9.0">
 </head>
 <body>
   <!-- Header -->
@@ -92,18 +92,22 @@
         <!-- Grid de Artigos -->
         <div class="artigos__grid">
 
-          <!-- Artigo 1 -->
-          <article class="artigo-card" data-category="familia">
-            <div class="artigo-card__meta">
-              <span class="artigo-card__category">Familia</span>
-              <span class="artigo-card__read-time">5 min de leitura</span>
-              <time class="artigo-card__date" datetime="2026-02-01">01/02/2026</time>
+          <!-- Artigo Destaque -->
+          <article class="artigo-card artigo-card--featured" data-category="familia">
+            <div>
+              <div class="artigo-card__meta">
+                <span class="artigo-card__category">Familia</span>
+                <span class="artigo-card__read-time">5 min de leitura</span>
+                <time class="artigo-card__date" datetime="2026-02-01">01/02/2026</time>
+              </div>
+              <h2 class="artigo-card__title">
+                <a href="#">Quais sao meus direitos em um divorcio?</a>
+              </h2>
             </div>
-            <h2 class="artigo-card__title">
-              <a href="#">Quais sao meus direitos em um divorcio?</a>
-            </h2>
-            <p class="artigo-card__excerpt">O divorcio envolve questoes patrimoniais, guarda de filhos e pensao alimenticia. Entenda como a legislacao brasileira protege seus direitos nesse momento delicado e quais passos seguir para garantir um processo justo.</p>
-            <a href="#" class="artigo-card__link">Leia mais &rarr;</a>
+            <div>
+              <p class="artigo-card__excerpt">O divorcio envolve questoes patrimoniais, guarda de filhos e pensao alimenticia. Entenda como a legislacao brasileira protege seus direitos nesse momento delicado e quais passos seguir para garantir um processo justo e equilibrado para todas as partes envolvidas.</p>
+              <a href="#" class="artigo-card__link">Leia mais &rarr;</a>
+            </div>
           </article>
 
           <!-- Artigo 2 -->
