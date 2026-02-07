@@ -542,13 +542,13 @@ strong {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-5);
     padding-bottom: 0;
   }
 
   .hero__buttons .btn {
-    width: auto;
-    min-width: 200px;
+    width: 280px;
+    justify-content: center;
   }
 
   .hero__image {
