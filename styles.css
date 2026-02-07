@@ -531,12 +531,12 @@ strong {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 0 var(--space-6);
+    gap: var(--space-3);
   }
 
   .hero__buttons .btn {
-    width: 100%;
-    max-width: 280px;
+    width: auto;
+    min-width: 200px;
   }
 
   .hero__image {
@@ -553,14 +553,6 @@ strong {
 }
 
 @media (max-width: 480px) {
-  .hero__buttons {
-    padding: 0 var(--space-4);
-  }
-
-  .hero__buttons .btn {
-    max-width: 100%;
-  }
-
   .hero__title {
     font-size: var(--text-3xl);
   }
