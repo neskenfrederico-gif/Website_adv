@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://[DOMINIO]/sitemap.xml
+# Sitemap
+Sitemap: https://neskenfrederico-gif.github.io/Website_adv/sitemap.xml
+
+# Crawl-delay para não sobrecarregar
+Crawl-delay: 1
