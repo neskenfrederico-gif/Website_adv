@@ -2093,12 +2093,12 @@ strong {
    PRIVACIDADE
 ======================================== */
 .privacidade {
-  padding: var(--space-16) 0;
+  padding: var(--space-8) 0 var(--space-16);
 }
 
 .privacidade__intro {
   max-width: 800px;
-  margin: 0 auto var(--space-10);
+  margin: 0 auto var(--space-8);
   text-align: center;
 }
 
