@@ -1,7 +1,14 @@
 <?php
 // =============================================
-// CONFIGURAÇÕES
+// CONFIGURAÇÕES SMTP - HOSTINGER
 // =============================================
+require_once 'smtp.php';
+
+$smtp_server = "smtp.hostinger.com";
+$smtp_port = 465;
+$smtp_user = "contato@valdenisesantos.adv.br";
+$smtp_pass = "Kee3304ml@2050";
+
 $destinatario = "contato@valdenisesantos.adv.br";
 $assunto_prefixo = "[Site] Nova mensagem: ";
 
@@ -57,28 +64,19 @@ $corpo .= "Enviado em: " . date('d/m/Y H:i:s') . "\n";
 $corpo .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
 
 // =============================================
-// HEADERS (Compatível com Hostinger)
+// ENVIAR VIA SMTP
 // =============================================
-$headers = array();
-$headers[] = "MIME-Version: 1.0";
-$headers[] = "Content-type: text/plain; charset=UTF-8";
-$headers[] = "From: $destinatario";
-$headers[] = "Reply-To: $email";
-$headers[] = "X-Mailer: PHP/" . phpversion();
-
-// =============================================
-// ENVIAR
-// =============================================
-$enviado = @mail($destinatario, $assunto_email, $corpo, implode("\r\n", $headers));
-
-// =============================================
-// RESULTADO
-// =============================================
-if ($enviado) {
-    header("Location: obrigado.html");
-} else {
-    // Log do erro (opcional - para debug)
-    error_log("Erro ao enviar email do formulário de contato. De: $email");
+try {
+    $mailer = new SMTPMailer($smtp_server, $smtp_port, $smtp_user, $smtp_pass);
+    $enviado = $mailer->send($destinatario, $assunto_email, $corpo, $nome, $email);
+    
+    if ($enviado) {
+        header("Location: obrigado.html");
+    } else {
+        header("Location: contato.html?erro=envio");
+    }
+} catch (Exception $e) {
+    error_log("Erro SMTP: " . $e->getMessage());
     header("Location: contato.html?erro=envio");
 }
 exit;
