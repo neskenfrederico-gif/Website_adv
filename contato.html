@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles.css?v=6.6.0">
+  <link rel="stylesheet" href="styles.css?v=6.7.0">
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -162,8 +162,10 @@
           </div>
 
           <!-- Formulario -->
-          <form class="form" id="contact-form" action="#" method="POST">
+          <form class="form" id="contact-form" action="enviar.php" method="POST">
             <h2 class="form__title">Envie sua Mensagem</h2>
+            
+            <div id="form-alert" class="form__alert" style="display:none;"></div>
 
             <div class="form__group">
               <label class="form__label" for="nome">Nome Completo *</label>
@@ -295,5 +297,30 @@
   </a>
 
   <script src="script.js?v=1.0.0"></script>
+  <script>
+    // Verificar parâmetros da URL para mensagens
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const alert = document.getElementById('form-alert');
+      
+      if (params.get('sucesso') === '1') {
+        alert.textContent = '✓ Mensagem enviada com sucesso! Entraremos em contato em breve.';
+        alert.className = 'form__alert form__alert--success';
+        alert.style.display = 'block';
+        // Limpar URL
+        history.replaceState(null, '', 'contato.html');
+      } else if (params.get('erro')) {
+        const erros = {
+          'campos': 'Por favor, preencha todos os campos obrigatórios.',
+          'email': 'Por favor, insira um e-mail válido.',
+          'envio': 'Erro ao enviar mensagem. Tente novamente ou entre em contato pelo WhatsApp.'
+        };
+        alert.textContent = '✗ ' + (erros[params.get('erro')] || 'Erro desconhecido.');
+        alert.className = 'form__alert form__alert--error';
+        alert.style.display = 'block';
+        history.replaceState(null, '', 'contato.html');
+      }
+    })();
+  </script>
 </body>
 </html>
