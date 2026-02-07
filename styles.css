@@ -1464,6 +1464,248 @@ strong {
 }
 
 /* ========================================
+   BIOGRAFIA (Página Sobre)
+======================================== */
+.bio {
+  padding: var(--space-16) 0;
+}
+
+.bio__grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+.bio__photo {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-6));
+}
+
+.bio__photo img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.bio__content {
+  max-width: 640px;
+}
+
+.bio__content p {
+  margin-bottom: var(--space-4);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.sobre__lead {
+  font-size: var(--text-lg);
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: var(--space-5);
+}
+
+.sobre__stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 968px) {
+  .bio__grid {
+    grid-template-columns: 1fr;
+  }
+  .bio__photo {
+    position: relative;
+    top: 0;
+    max-width: 300px;
+    margin: 0 auto var(--space-8);
+  }
+  .sobre__stats {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .bio {
+    padding: var(--space-10) 0;
+  }
+  .sobre__stats {
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+}
+
+/* ========================================
+   TIMELINE (Página Sobre)
+======================================== */
+.timeline__list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.timeline__item {
+  position: relative;
+  padding-left: var(--space-8);
+  padding-bottom: var(--space-8);
+  border-left: 2px solid var(--border);
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.timeline__year {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: var(--space-2);
+}
+
+.timeline__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.timeline__text {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ========================================
+   VALORES (Página Sobre)
+======================================== */
+.valores__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.valor {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+
+.valor:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.valor__icon {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  color: var(--accent);
+}
+
+.valor__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.valor__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.valor__text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .valores__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   CTA (Call to Action)
+======================================== */
+.cta {
+  background: var(--primary);
+  text-align: center;
+}
+
+.cta__content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta__title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: var(--space-4);
+}
+
+.cta__text {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.7);
+  margin-bottom: var(--space-6);
+  line-height: 1.7;
+}
+
+.cta__buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn--white {
+  background: var(--white);
+  color: var(--primary);
+}
+
+.btn--white:hover {
+  background: var(--bg-subtle);
+}
+
+.btn--outline-white {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--white);
+}
+
+.btn--outline-white:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--white);
+}
+
+/* ========================================
    ANIMAÇÕES
 ======================================== */
 .is-visible {
