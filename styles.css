@@ -417,6 +417,7 @@ strong {
   display: flex;
   align-items: center;
   padding-top: var(--header-height);
+  padding-bottom: var(--space-12);
   background: var(--primary);
   color: var(--white);
   position: relative;
@@ -468,6 +469,7 @@ strong {
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
+  padding-bottom: var(--space-8);
 }
 
 .hero__image {
