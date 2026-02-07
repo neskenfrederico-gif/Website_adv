@@ -158,15 +158,8 @@ if (contactForm) {
     }
 
     if (isValid) {
-      const successMsg = document.createElement('div');
-      successMsg.className = 'form-success';
-      successMsg.innerHTML = '<p>Mensagem enviada com sucesso! Entrarei em contato em breve.</p>';
-      this.appendChild(successMsg);
-      this.reset();
-
-      setTimeout(() => {
-        successMsg.remove();
-      }, 5000);
+      // Submeter o formulário para o PHP
+      this.submit();
     }
   });
 
