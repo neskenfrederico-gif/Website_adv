@@ -574,23 +574,23 @@ strong {
 }
 
 .area-card {
-  background: var(--white);
-  border: 1px solid var(--border);
+  background: var(--primary);
+  border: none;
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   transition: all var(--transition);
 }
 
 .area-card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
+  background: var(--primary-light);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
 }
 
 .area-card__icon {
   width: 48px;
   height: 48px;
-  background: var(--bg-alt);
+  background: var(--accent);
   border-radius: var(--radius);
   display: flex;
   align-items: center;
@@ -601,7 +601,7 @@ strong {
 }
 
 .area-card:hover .area-card__icon {
-  background: var(--accent);
+  background: var(--white);
   color: var(--primary);
 }
 
@@ -615,12 +615,12 @@ strong {
   font-size: var(--text-lg);
   font-weight: 600;
   margin-bottom: var(--space-3);
-  color: var(--text);
+  color: var(--white);
 }
 
 .area-card__text {
   font-size: var(--text-sm);
-  color: var(--text-secondary);
+  color: rgba(255,255,255,0.7);
   margin-bottom: var(--space-4);
   line-height: 1.6;
 }
@@ -632,7 +632,7 @@ strong {
 }
 
 .area-card__link:hover {
-  color: var(--accent-hover);
+  color: var(--white);
 }
 
 @media (max-width: 968px) {
