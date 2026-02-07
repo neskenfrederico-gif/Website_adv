@@ -76,15 +76,39 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-document.querySelectorAll('.area-card, .diferencial, .depoimento, .valor, .area-detail, .artigo-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+// Elementos para animar
+const animatedElements = [
+  '.area-card',
+  '.diferencial', 
+  '.depoimento',
+  '.valor',
+  '.area-detail',
+  '.artigo-card',
+  '.insight-card',
+  '.sobre__image',
+  '.sobre__content',
+  '.newsletter__content',
+  '.newsletter__form',
+  '.section__header',
+  '.stat'
+];
+
+animatedElements.forEach(selector => {
+  document.querySelectorAll(selector).forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    observer.observe(el);
+  });
+});
+
+// Elementos com animação especial (fade-in classes)
+document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in').forEach(el => {
   observer.observe(el);
 });
 
 const style = document.createElement('style');
-style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) !important; }';
+style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) translateX(0) scale(1) !important; }';
 document.head.appendChild(style);
 
 // ========================================
@@ -201,4 +225,82 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 // ========================================
 document.querySelectorAll('[data-year]').forEach(el => {
   el.textContent = new Date().getFullYear();
+});
+
+// ========================================
+// NEWSLETTER FORM
+// ========================================
+const newsletterForm = document.querySelector('.newsletter__form');
+
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const emailInput = this.querySelector('.newsletter__input');
+    const email = emailInput.value.trim();
+    
+    if (!email || !isValidEmail(email)) {
+      emailInput.style.borderColor = '#dc2626';
+      emailInput.focus();
+      return;
+    }
+    
+    // Simular envio (substituir por integração real depois)
+    const btn = this.querySelector('.newsletter__btn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+      btn.textContent = '✓ Inscrito!';
+      btn.style.background = '#059669';
+      emailInput.value = '';
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }, 1000);
+  });
+  
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+}
+
+// ========================================
+// COUNTER ANIMATION (Stats)
+// ========================================
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = entry.target;
+      const finalValue = target.textContent;
+      
+      // Se for número, anima
+      if (/^\d+/.test(finalValue)) {
+        const numValue = parseInt(finalValue);
+        let current = 0;
+        const increment = numValue / 30;
+        const suffix = finalValue.replace(/[\d]/g, '');
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= numValue) {
+            target.textContent = finalValue;
+            clearInterval(timer);
+          } else {
+            target.textContent = Math.floor(current) + suffix;
+          }
+        }, 30);
+      }
+      
+      counterObserver.unobserve(target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat__number').forEach(el => {
+  counterObserver.observe(el);
 });
