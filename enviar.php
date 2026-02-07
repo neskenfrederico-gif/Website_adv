@@ -43,7 +43,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // =============================================
-// MONTAR EMAIL
+// EMAIL 1: NOTIFICAÇÃO PARA A ADVOGADA
 // =============================================
 $assunto_email = $assunto_prefixo . $assunto;
 
@@ -64,13 +64,40 @@ $corpo .= "Enviado em: " . date('d/m/Y H:i:s') . "\n";
 $corpo .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
 
 // =============================================
+// EMAIL 2: AUTO-RESPOSTA PARA O CLIENTE
+// =============================================
+$assunto_cliente = "Recebemos sua mensagem - Dra. Valdenise Santos Advocacia";
+
+$corpo_cliente = "Olá, $nome!\n\n";
+$corpo_cliente .= "Obrigada por entrar em contato!\n\n";
+$corpo_cliente .= "Recebemos sua mensagem sobre \"$assunto\" e retornaremos em até 24 horas úteis.\n\n";
+$corpo_cliente .= "Se preferir um atendimento mais rápido, você também pode nos chamar no WhatsApp:\n";
+$corpo_cliente .= "📱 (62) 98257-0200\n\n";
+$corpo_cliente .= "─────────────────────────────────────\n";
+$corpo_cliente .= "Sua mensagem:\n";
+$corpo_cliente .= "─────────────────────────────────────\n";
+$corpo_cliente .= "$mensagem\n\n";
+$corpo_cliente .= "─────────────────────────────────────\n\n";
+$corpo_cliente .= "Atenciosamente,\n\n";
+$corpo_cliente .= "Dra. Valdenise Santos da Silva\n";
+$corpo_cliente .= "Advogada - OAB/GO 69640\n";
+$corpo_cliente .= "contato@valdenisesantos.adv.br\n";
+$corpo_cliente .= "www.valdenisesantos.adv.br\n";
+
+// =============================================
 // ENVIAR VIA SMTP
 // =============================================
 try {
     $mailer = new SMTPMailer($smtp_server, $smtp_port, $smtp_user, $smtp_pass);
-    $enviado = $mailer->send($destinatario, $assunto_email, $corpo, $nome, $email);
     
-    if ($enviado) {
+    // Enviar para a advogada
+    $enviado1 = $mailer->send($destinatario, $assunto_email, $corpo, $nome, $email);
+    
+    // Enviar auto-resposta para o cliente
+    $mailer2 = new SMTPMailer($smtp_server, $smtp_port, $smtp_user, $smtp_pass);
+    $enviado2 = $mailer2->send($email, $assunto_cliente, $corpo_cliente, "Dra. Valdenise Santos", $smtp_user);
+    
+    if ($enviado1) {
         header("Location: obrigado.html");
     } else {
         header("Location: contato.html?erro=envio");
